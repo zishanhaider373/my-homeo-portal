@@ -3,73 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homeopathy Features</title>
+    <title>Homeo Portal Offline</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkhvbWVvcGF0aGljIFBvcnRhbCIsCiAgInNob3J0X25hbWUiOiAiSG9tZW9QYWRhIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmNGY3ZjYiLAogICJ0aGVtZV9jb2xvciI6ICIjMDY0MDJCIgp9">
-
     <style>
-        /* Aapka purana CSS */
-        h1 { font-size: 25px; color: #06402B; text-align: center; margin-top: 3px; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; margin:0; padding: 0; }
-        .navbar { background-color: #06402B; padding: 10px; display: flex; justify-content: center; gap: 20px; position: sticky; top: 0; z-index: 1000; }
-        .nav-item { background-color: #1a5e44; color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 20px; cursor: pointer; border: 1px solid #27ae60; }
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { display: none; position: absolute; background-color: white; min-width: 250px; max-height: 400px; overflow-y: auto; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 1001; border-radius: 5px; right: 0; }
-        .dropdown-content a { color: #333; padding: 12px 16px; text-decoration: none; display: block; border-bottom: 1px solid #eee; font-size: 20px; cursor: pointer; }
-        .show { display: block; }
-        .container { max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        /* CSS Settings */
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; margin:0; padding: 0; direction: ltr; }
+        h1 { font-size: 25px; color: #06402B; text-align: center; margin-top: 10px; }
+        .navbar { background-color: #06402B; padding: 10px; display: flex; justify-content: center; gap: 10px; position: sticky; top: 0; z-index: 1000; }
+        .nav-item { background-color: #1a5e44; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; cursor: pointer; border: 1px solid #27ae60; }
+        .container { max-width: 800px; margin: 15px auto; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .section-box { background: #eef9f3; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #27ae60; }
-        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 18px; }
-        .btn { border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; color: white; width: 45%; margin-top: 5px; }
-        .btn-save { background: #06402B; width: 100%; }
-        .btn-link { background: #e67e22; width: 100%; }
+        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        .btn { border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; color: white; width: 48%; }
+        .btn-save { background: #06402B; width: 100%; margin-bottom: 10px; }
         .btn-backup { background: #2980b9; }
         .btn-import { background: #16a085; }
-        .match-badge { background: #27ae60; color: white; padding: 2px 8px; border-radius: 12px; font-size: 18px; margin-left: 10px; }
-        .card { background: white; border-left: 6px solid #06402B; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
-        .action-btns { display: flex; gap: 5px; }
-        .delete-btn { background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
-        .edit-btn { background: #3498db; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
-        @media (max-width: 600px) { .btn { width: 48%; } }
+        .card { background: white; border-left: 6px solid #06402B; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .match-badge { background: #27ae60; color: white; padding: 2px 8px; border-radius: 12px; font-size: 14px; }
     </style>
 </head>
-
 <body>
 
 <div class="navbar">
     <div class="nav-item" onclick="location.reload()">Home</div>
-    <div class="dropdown">
-        <div class="nav-item" onclick="toggleDrop('bookDrop')">Books</div>
-        <div id="bookDrop" class="dropdown-content"></div>
-    </div>
-    <div class="dropdown">
-        <div class="nav-item" onclick="toggleDrop('medDrop')">Medicines</div>
-        <div id="medDrop" class="dropdown-content"></div>
-    </div>
+    <div class="nav-item" onclick="alert('Use search to find medicines')">Search</div>
 </div>
 
 <div class="container">
-    <h1>Homeopathic Portal</h1>
+    <h1>Homeopathic Portal (Offline)</h1>
     
-    <div class="section-box" style="background: #fff3e0; border-color: #e67e22;">
-        <h3 style="margin: 0; color: #e67e22;">Add Book/pdf</h3>
-        <input type="text" id="bookName" placeholder="Book ka Naam">
-        <input type="text" id="bookLink" placeholder="Google Drive Share Link...">
-        <button class="btn btn-link" onclick="saveBookLink()">Save Book</button>
+    <div class="section-box">
+        <input type="text" id="medName" placeholder="Medicine Name...">
+        <textarea id="medSymptoms" rows="3" placeholder="Symptoms (nazla, bukhar...)"></textarea>
+        <button class="btn btn-save" onclick="saveData()">Save Medicine</button>
     </div>
 
-    <div class="section-box" id="medForm">
-        <h3 style="margin: 0; color: #06402B;" id="formTitle">Add Medicines with symptoms</h3>
-        <input type="text" id="medName" placeholder="Medicine ka Naam...">
-        <textarea id="medSymptoms" rows="3" placeholder="Symptoms (nazla, zukam, bukhar...)"></textarea>
-        <button class="btn btn-save" id="saveBtn" onclick="saveData()">Save Medicine</button>
-        <button class="btn" id="cancelBtn" onclick="resetForm()" style="display:none; background:#95a5a6; width:100%;">Cancel Edit</button>
-    </div>
-
-    <input type="text" id="searchInput" onkeyup="searchEverything()" placeholder="Search symptoms (use comma for multiple)...">
+    <input type="text" id="searchInput" onkeyup="searchEverything()" placeholder="Search symptoms...">
     <div id="results"></div>
 
-    <hr>
     <div style="display: flex; justify-content: space-between; margin-top: 20px;">
         <button class="btn btn-backup" onclick="exportData()">Backup</button>
         <button class="btn btn-import" onclick="importData()">Import</button>
@@ -78,174 +51,65 @@
 </div>
 
 <script>
-    // --- SERVICE WORKER REGISTRATION (For Offline Use) ---
+    // --- SABSE ZAROORI: OFFLINE SYSTEM ---
     if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            const swCode = `
-                const cacheName = 'homeo-v1';
-                self.addEventListener('install', e => {
-                    e.waitUntil(caches.open(cacheName).then(cache => cache.addAll([location.href])));
-                });
-                self.addEventListener('fetch', e => {
-                    e.respondWith(caches.match(e.request).then(res => res || fetch(e.request)));
-                });
-            `;
-            const blob = new Blob([swCode], {type: 'text/javascript'});
-            navigator.serviceWorker.register(URL.createObjectURL(blob));
-        });
+        const swCode = `
+            const cacheName = 'homeo-cache-v1';
+            self.addEventListener('install', e => {
+                e.waitUntil(caches.open(cacheName).then(cache => cache.addAll([location.pathname, './index.html'])));
+            });
+            self.addEventListener('fetch', e => {
+                e.respondWith(caches.match(e.request).then(res => res || fetch(e.request)));
+            });
+        `;
+        const blob = new Blob([swCode], {type: 'text/javascript'});
+        navigator.serviceWorker.register(URL.createObjectURL(blob));
     }
 
-    // --- Aapka Logic ---
-    let medicineData = JSON.parse(localStorage.getItem('myHomeoData')) || [];
-    let cloudBooks = JSON.parse(localStorage.getItem('myCloudBooks')) || [];
-    let editId = null;
-
-    function toggleDrop(id) {
-        document.querySelectorAll('.dropdown-content').forEach(d => {
-            if(d.id !== id) d.classList.remove('show');
-        });
-        document.getElementById(id).classList.toggle("show");
-    }
+    // --- Data Logic ---
+    let medicineData = JSON.parse(localStorage.getItem('homeoData')) || [];
 
     function saveData() {
         let name = document.getElementById('medName').value.trim();
-        let symptoms = document.getElementById('medSymptoms').value.trim();
-        if (!name || !symptoms) return alert("Details bharain!");
-
-        if (editId) {
-            let index = medicineData.findIndex(m => m.id === editId);
-            medicineData[index].name = name;
-            medicineData[index].symptoms = symptoms;
-        } else {
-            medicineData.push({ id: Date.now(), name: name, symptoms: symptoms });
-        }
-        localStorage.setItem('myHomeoData', JSON.stringify(medicineData));
-        resetForm();
-        updateMedicineDropdown();
-        searchEverything();
+        let symp = document.getElementById('medSymptoms').value.trim();
+        if(!name || !symp) return alert("Fill details!");
+        medicineData.push({ id: Date.now(), name, symptoms: symp });
+        localStorage.setItem('homeoData', JSON.stringify(medicineData));
+        document.getElementById('medName').value = '';
+        document.getElementById('medSymptoms').value = '';
+        alert("Saved!");
     }
 
-    function editMedicine(id) {
-        let med = medicineData.find(m => m.id === id);
-        if(!med) return;
-        document.getElementById('medName').value = med.name;
-        document.getElementById('medSymptoms').value = med.symptoms;
-        document.getElementById('formTitle').innerText = "Updating: " + med.name;
-        document.getElementById('saveBtn').innerText = "Update Now";
-        document.getElementById('cancelBtn').style.display = "block";
-        editId = id;
-        window.scrollTo(0,0);
-    }
+    function searchEverything() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = '';
+        if (input.length < 2) return;
 
-    function resetForm() {
-        document.getElementById('medName').value = "";
-        document.getElementById('medSymptoms').value = "";
-        document.getElementById('formTitle').innerText = "Add Medicines with symptoms";
-        document.getElementById('saveBtn').innerText = "Save Medicine";
-        document.getElementById('cancelBtn').style.display = "none";
-        editId = null;
+        medicineData.filter(m => m.name.toLowerCase().includes(input) || m.symptoms.toLowerCase().includes(input))
+        .forEach(m => {
+            resultsDiv.innerHTML += `<div class="card"><b>${m.name}</b><br><small>${m.symptoms}</small></div>`;
+        });
     }
 
     function exportData() {
-        let allData = { medicines: medicineData, books: cloudBooks };
-        let blob = new Blob([JSON.stringify(allData)], { type: "application/json" });
-        let url = URL.createObjectURL(blob);
+        let blob = new Blob([JSON.stringify(medicineData)], { type: "application/json" });
         let a = document.createElement("a");
-        a.href = url;
+        a.href = URL.createObjectURL(blob);
         a.download = "Homeo_Backup.json";
         a.click();
     }
 
     function importData() { document.getElementById('fileInput').click(); }
-
-    function handleFile(event) {
-        let file = event.target.files[0];
-        if (!file) return;
+    function handleFile(e) {
         let reader = new FileReader();
-        reader.onload = function(e) {
-            try {
-                let imported = JSON.parse(e.target.result);
-                if (imported.medicines) medicineData = imported.medicines;
-                if (imported.books) cloudBooks = imported.books;
-                localStorage.setItem('myHomeoData', JSON.stringify(medicineData));
-                localStorage.setItem('myCloudBooks', JSON.stringify(cloudBooks));
-                alert("Data Imported!");
-                location.reload();
-            } catch (err) { alert("Invalid File!"); }
+        reader.onload = function(event) {
+            medicineData = JSON.parse(event.target.result);
+            localStorage.setItem('homeoData', JSON.stringify(medicineData));
+            alert("Data Imported!");
         };
-        reader.readAsText(file);
+        reader.readAsText(e.target.files[0]);
     }
-
-    function saveBookLink() {
-        let name = document.getElementById('bookName').value.trim();
-        let link = document.getElementById('bookLink').value.trim();
-        if (!name || !link) return alert("Details bharain!");
-        cloudBooks.push({ id: Date.now(), name: name, link: link });
-        localStorage.setItem('myCloudBooks', JSON.stringify(cloudBooks));
-        updateBookDropdown();
-        document.getElementById('bookName').value = "";
-        document.getElementById('bookLink').value = "";
-    }
-
-    function updateBookDropdown() {
-        const container = document.getElementById('bookDrop');
-        container.innerHTML = cloudBooks.length === 0 ? '<a>No Books</a>' : '';
-        cloudBooks.forEach(book => {
-            let a = document.createElement('a');
-            a.href = book.link; a.target = "_blank"; a.textContent = book.name;
-            container.appendChild(a);
-        });
-    }
-
-    function updateMedicineDropdown() {
-        const container = document.getElementById('medDrop');
-        container.innerHTML = medicineData.length === 0 ? '<a>No Medicines</a>' : '';
-        medicineData.forEach(med => {
-            let a = document.createElement('a');
-            a.textContent = med.name;
-            a.onclick = () => { document.getElementById('searchInput').value = med.name; searchEverything(); };
-            container.appendChild(a);
-        });
-    }
-
-    function searchEverything() {
-        let input = document.getElementById('searchInput').value.toLowerCase().trim();
-        let resultsDiv = document.getElementById('results');
-        resultsDiv.innerHTML = '';
-        if (input.length < 1) return;
-        let terms = input.split(',').map(s => s.trim()).filter(s => s !== "");
-        medicineData.map(med => {
-            let score = 0;
-            terms.forEach(t => { 
-                if(med.symptoms.toLowerCase().includes(t) || med.name.toLowerCase().includes(t)) score++; 
-            });
-            return { ...med, score };
-        }).filter(m => m.score > 0).sort((a,b) => b.score - a.score).forEach(m => {
-            resultsDiv.innerHTML += `
-                <div class="card">
-                    <div><b>${m.name}</b> <span class="match-badge">${m.score} Match</span><br><small>${m.symptoms}</small></div>
-                    <div class="action-btns">
-                        <button class="edit-btn" onclick="editMedicine(${m.id})">Edit</button>
-                        <button class="delete-btn" onclick="deleteItem(${m.id}, 'med')">Del</button>
-                    </div>
-                </div>`;
-        });
-    }
-
-    function deleteItem(id, type) {
-        if (!confirm("Delete?")) return;
-        if (type === 'med') {
-            medicineData = medicineData.filter(i => i.id !== id);
-            localStorage.setItem('myHomeoData', JSON.stringify(medicineData));
-        } else {
-            cloudBooks = cloudBooks.filter(i => i.id !== id);
-            localStorage.setItem('myCloudBooks', JSON.stringify(cloudBooks));
-        }
-        location.reload();
-    }
-
-    window.onload = function() { updateMedicineDropdown(); updateBookDropdown(); };
 </script>
-
 </body>
 </html>
